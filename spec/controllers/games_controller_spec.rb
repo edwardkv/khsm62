@@ -150,5 +150,18 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to redirect_to(game_path(game_w_questions))
       expect(flash[:alert]).to be
     end
+
+    it 'answer wrong' do
+      question = game_w_questions.current_game_question
+      wrong_answer = ['a', 'b', 'c', 'd'].find { |l| l != question.correct_answer_key }
+      put :answer, id: game_w_questions.id, letter: wrong_answer
+      game = assigns(:game)
+
+      expect(game.finished?).to be true
+      expect(game.status).to eq :fail
+      expect(game.current_level).to be_zero
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
+    end
   end
 end
