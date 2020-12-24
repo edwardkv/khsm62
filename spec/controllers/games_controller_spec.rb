@@ -152,8 +152,7 @@ RSpec.describe GamesController, type: :controller do
     end
 
     it 'answer wrong' do
-      question = game_w_questions.current_game_question
-      wrong_answer = ['a', 'b', 'c', 'd'].find { |l| l != question.correct_answer_key }
+      wrong_answer = 'a' # правильный ответ всегда в 'd' для тестов(так задано в фабрике)
       put :answer, id: game_w_questions.id, letter: wrong_answer
       game = assigns(:game)
 
