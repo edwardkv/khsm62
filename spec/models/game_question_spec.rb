@@ -48,5 +48,41 @@ RSpec.describe GameQuestion, type: :model do
       ah = game_question.help_hash[:audience_help]
       expect(ah.keys).to contain_exactly('a', 'b', 'c', 'd')
     end
+
+    it 'correct .help_hash' do
+      expect(game_question.help_hash).to eq({})
+
+      game_question.help_hash[:some_key1] = 'value1'
+      game_question.help_hash['some_key2'] = 'value2'
+      game_question.help_hash['some_key3'] = 'value3'
+
+      expect(game_question.save).to be_truthy
+
+      game_question1 = GameQuestion.find(game_question.id)
+
+      expect(game_question1.help_hash).to eq({some_key1: 'value1', 'some_key2' => 'value2', 'some_key3' => 'value3'})
+    end
+
+    it 'correct fifty_fifty' do
+      expect(game_question.help_hash).not_to include(:fifty_fifty)
+      game_question.add_fifty_fifty
+
+      expect(game_question.help_hash).to include(:fifty_fifty)
+      fifty_fifty = game_question.help_hash[:fifty_fifty]
+
+      expect(fifty_fifty).to include('b')
+      expect(fifty_fifty.size).to eq 2
+    end
+
+    it 'correct friend_call' do
+      expect(game_question.help_hash).not_to include(:friend_call)
+      game_question.add_friend_call
+
+      expect(game_question.help_hash).to include(:friend_call)
+      friend_call = game_question.help_hash[:friend_call]
+
+      expect(friend_call).to include('считает, что это вариант')
+      expect(friend_call).to match /A|B|C|D/
+    end
   end
 end
