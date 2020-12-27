@@ -3,8 +3,8 @@ require 'rails_helper'
 
 RSpec.feature 'USER watches profile another user', type: :feature do
   # создать пользователя
-  let(:user) { FactoryGirl.create :user, name: 'Иван', email: 'ivan12@mail.ru' }
-  let(:user_another) { FactoryGirl.create :user, name: 'Маша', email: 'masha4@mail.ru' }
+  let(:user) { FactoryGirl.create :user, name: 'Иван' }
+  let(:user_another) { FactoryGirl.create :user, name: 'Маша' }
 
   let!(:games) do
     [
