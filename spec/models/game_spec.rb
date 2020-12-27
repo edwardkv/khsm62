@@ -64,7 +64,6 @@ RSpec.describe Game, type: :model do
       # Перешли на след. уровень
       expect(game_w_questions.current_level).to eq(level + 1)
 
-      # Ранее текущий вопрос стал предыдущим
       expect(game_w_questions.current_game_question).not_to eq(q)
 
       # Игра продолжается

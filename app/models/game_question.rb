@@ -1,4 +1,4 @@
-#  (c) goodprogrammer.ru
+# (c) goodprogrammer.ru
 require 'game_help_generator'
 
 # Игровой вопрос — модель, которая связывает игру и вопрос. При создании новой
